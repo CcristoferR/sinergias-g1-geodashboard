@@ -2,6 +2,8 @@ import { supabase } from '@/lib/supabase'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import ExportButton from './ExportButton'
+import DeleteButton from './DeleteButton'
+import EditButton from './EditButton'
 
 const CONFIG_ESTADO: Record<string, { bg: string; text: string; dot: string; label: string }> = {
   'no iniciada':       { bg: '#f1f0ee', text: '#6b6b5a', dot: '#9a9a8a', label: 'No iniciada' },
@@ -104,30 +106,38 @@ export default async function FichaPage({ params }: { params: Promise<{ id: stri
     <div className="min-h-screen bg-[#f0f2ef]">
       <div className="max-w-4xl mx-auto p-6 md:p-8 space-y-6">
 
-        {/* Header */}
-        <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
-          <div className="space-y-2">
-            <p className="text-xs uppercase tracking-widest text-[#2d8f7f] font-semibold">
-              Ficha institucional
-            </p>
-            <h1 className="text-2xl md:text-3xl font-semibold text-[#0a2e1a] leading-tight">
-              {inst.nombre}
-            </h1>
-            <BadgeEstado estado={inst.estado_general} />
-          </div>
-          <div className="flex gap-2 shrink-0">
-            <Link
-              href="/instituciones"
-              className="inline-flex items-center gap-1.5 border border-[#e0d9c8] bg-white px-4 py-2.5 rounded-xl text-sm text-[#5a6664] hover:bg-[#f5f5f3] transition-colors shadow-sm font-medium"
-            >
-              <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-              </svg>
-              Volver
-            </Link>
-            <ExportButton />
-          </div>
-        </div>
+       {/* Header */}
+<div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
+  <div className="space-y-2">
+    <p className="text-xs uppercase tracking-widest text-[#2d8f7f] font-semibold">
+      Ficha institucional
+    </p>
+
+    <h1 className="text-2xl md:text-3xl font-semibold text-[#0a2e1a] leading-tight">
+      {inst.nombre}
+    </h1>
+
+    <BadgeEstado estado={inst.estado_general} />
+  </div>
+
+  <div className="flex gap-2 shrink-0">
+    <Link
+      href="/instituciones"
+      className="inline-flex items-center gap-1.5 border border-[#e0d9c8] bg-white px-4 py-2.5 rounded-xl text-sm text-[#5a6664] hover:bg-[#f5f5f3] transition-colors shadow-sm font-medium"
+    >
+      <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+      </svg>
+      Volver
+    </Link>
+
+    <EditButton id={inst.id} />
+
+    <DeleteButton id={inst.id} />
+
+    <ExportButton />
+  </div>
+</div>
 
         {/* Cards resumen */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
