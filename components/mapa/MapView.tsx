@@ -24,12 +24,18 @@ interface Institucion {
   estado_general: string
 }
 
-export default function MapView({ instituciones }: { instituciones: Institucion[] }) {
+export default function MapView({ 
+  instituciones,
+  altura = '400px'
+}: { 
+  instituciones: Institucion[]
+  altura?: string
+}) {
   return (
     <MapContainer
-      center={[-41.47, -72.94]}
+      center={[-41.8, -73.5]}
       zoom={7}
-      style={{ height: '600px', width: '100%', borderRadius: '8px' }}
+      style={{ height: altura, width: '100%', borderRadius: '12px' }}
       scrollWheelZoom={false}
     >
       <TileLayer
