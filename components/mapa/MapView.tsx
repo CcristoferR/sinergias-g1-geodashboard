@@ -24,22 +24,27 @@ interface Institucion {
   estado_general: string
 }
 
-export default function MapView({ instituciones }: { instituciones: Institucion[] }) {
-
+export default function MapView({
+  instituciones,
+  altura = '600px',
+}: {
+  instituciones: Institucion[]
+  altura?: string
+}) {
   return (
-    // 🔥 FIX CLAVE: encapsular el mapa para que NO flote sobre toda la app
-    <div className="relative w-full h-[600px] rounded-xl overflow-hidden z-0">
-
+    <div
+      className="relative w-full rounded-xl overflow-hidden z-0"
+      style={{ height: altura }}
+    >
       <MapContainer
         center={[-41.47, -72.94]}
         zoom={7}
         className="w-full h-full z-0"
         scrollWheelZoom={false}
       >
-
         <TileLayer
           url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
-          attribution='&copy; CARTO'
+          attribution="&copy; CARTO"
         />
 
         {instituciones.map((inst) => (
@@ -53,12 +58,15 @@ export default function MapView({ instituciones }: { instituciones: Institucion[
                 <p style={{ fontWeight: 600, marginBottom: 4 }}>
                   {inst.nombre}
                 </p>
+
                 <p style={{ fontSize: 12, color: '#5a6664' }}>
                   {inst.comuna}
                 </p>
+
                 <p style={{ fontSize: 12, color: '#5a6664' }}>
                   {inst.tipo_institucion}
                 </p>
+
                 <p style={{ fontSize: 12, color: '#0f6e56', marginTop: 4 }}>
                   ● {inst.estado_general}
                 </p>
@@ -66,7 +74,6 @@ export default function MapView({ instituciones }: { instituciones: Institucion[
             </Popup>
           </Marker>
         ))}
-
       </MapContainer>
     </div>
   )
