@@ -111,8 +111,6 @@ export default function InstitucionesPage() {
   return (
     <div className="min-h-screen bg-[#f0f2ef]">
       <div className="p-6 md:p-8 space-y-6 max-w-[1400px] mx-auto">
-
-
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
           <div>
